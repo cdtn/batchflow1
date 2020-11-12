@@ -15,9 +15,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    container:
-      image: analysiscenter1/ds-py3:cpu
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
@@ -25,13 +22,11 @@ jobs:
       with:
         python-version: 3.7
     - name: Install dependencies
-      run: |
-        python3 -m pip3 install --upgrade pip
-        pip3 install setuptools wheel twine
+      run: python -m pip install --upgrade pip setuptools wheel twine
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ '__token__' }}
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
-        python3 setup.py sdist bdist_wheel
+        python setup.py sdist bdist_wheel
         twine upload --repository testpypi dist/*
