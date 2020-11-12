@@ -17,10 +17,10 @@ with open('README.md', 'r') as f:
 
 
 setup(
-    name='batchflow-test',
+    name='batchflow1',
     packages=find_packages(exclude=['examples']),
     version=version,
-    url='https://github.com/cdtn/batchflow-test',
+    url='https://github.com/cdtn/batchflow1',
     license='Apache License 2.0',
     author='Roman Kh at al',
     author_email='rhudor@gmail.com',
