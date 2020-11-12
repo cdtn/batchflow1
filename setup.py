@@ -30,12 +30,12 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=[
-        'numpy',
-        'pandas',
-        'dill',
-        'tqdm',
-        'scipy',
-        'scikit-image',
+        'numpy>=1.19',
+        'pandas>=1.1',
+        'dill>=0.2.7',
+        'tqdm>=4.19.7',
+        'scipy>=0.19.1',
+        'scikit-image>=0.17',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
