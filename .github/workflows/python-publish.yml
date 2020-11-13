@@ -24,7 +24,7 @@ jobs:
     - name: Build docs
       run: |
         export LC_ALL="C"
-        python -m pip install --upgrade pip sphinx sphinx-rtd-theme
+        pip3 install --upgrade sphinx sphinx-rtd-theme
         git checkout --orphan gh-pages
         rm -rf *
         git fetch
@@ -47,7 +47,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Install dependencies
-      run: python -m pip install --upgrade pip setuptools wheel twine
+      run: pip3 install --upgrade setuptools wheel twine
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ '__token__' }}
