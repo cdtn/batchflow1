@@ -5,6 +5,8 @@ name: Upload Python Package
 
 on:
   push:
+    branches:
+      - master
     tags:
       - v*
 
@@ -15,6 +17,9 @@ jobs:
 
     container:
       image: analysiscenter1/ds-py3:cpu
+    
+    - name: test print
+      run: git status
 
     steps:
     - uses: actions/checkout@v2
