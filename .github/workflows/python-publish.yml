@@ -13,6 +13,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    container:
+      image: analysiscenter1/ds-py3:cpu
+
     steps:
     - uses: actions/checkout@v2
 
