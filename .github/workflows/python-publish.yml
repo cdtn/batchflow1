@@ -41,7 +41,7 @@ jobs:
         git config user.name "Roman Kh"
         git add -A .
         git commit -am "Build docs"
-        git remote add gh_pages https://${{ secrets.GITHUB_PUSH }}@github.com/${{ github.repository }}
+        git remote add gh_pages https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git push -f gh_pages gh-pages
 
     - uses: actions/checkout@v1
