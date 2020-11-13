@@ -19,10 +19,6 @@ jobs:
       image: analysiscenter1/ds-py3:cpu
 
     steps:
-    
-    - name: test print 0
-      run: git status
-
     - uses: actions/checkout@v2
 
     - name: test print 1
