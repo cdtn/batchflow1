@@ -21,14 +21,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: test print 1
-      run: git status
-      
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
-
     - name: Build docs
       run: |
         export LC_ALL="C"
