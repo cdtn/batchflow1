@@ -1,12 +1,7 @@
-# This workflows will upload a Python Package using Twine when a release is created
-# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
-
 name: Upload Python Package
 
 on:
   push:
-    branches:
-      - master
     tags:
       - v*
 
@@ -32,7 +27,7 @@ jobs:
         cd docs
         make html
 
-    - name: Push docs
+    - name: Commit docs
       run: |
         mv docs/_build/html/* .
         rm -rf docs batchflow
@@ -41,17 +36,22 @@ jobs:
         git config user.name "Roman Kh"
         git add -A .
         git commit -am "Build docs"
-    - name: Push changes
+
+    - name: Push docs
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: gh-pages
         force: True
 
+    - name: Clear docs
+      run: rm -rf *
+
     - uses: actions/checkout@v1
 
     - name: Install dependencies
       run: pip3 install --upgrade setuptools wheel twine
+
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ '__token__' }}
