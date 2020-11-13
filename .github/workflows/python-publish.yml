@@ -17,13 +17,17 @@ jobs:
 
     container:
       image: analysiscenter1/ds-py3:cpu
-    
-    - name: test print
-      run: git status
 
     steps:
+    
+    - name: test print 0
+      run: git status
+
     - uses: actions/checkout@v2
 
+    - name: test print 1
+      run: git status
+      
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
