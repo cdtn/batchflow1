@@ -5,22 +5,48 @@ name: Upload Python Package
 
 on:
   push:
-    branches:
-      - master
     tags:
       - v*
 
 jobs:
   deploy:
+    if: github.event.base_ref == 'refs/heads/master'
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.7
+
+    - name: Build docs
+      run: |
+        export LC_ALL="C"
+        python -m pip install --upgrade pip sphinx sphinx-rtd-theme
+        git checkout --orphan gh-pages
+        rm -rf *
+        git fetch
+        git checkout origin/master -- batchflow docs
+        cd docs
+        make html
+
+    - name: Push docs
+      run: |
+        mv docs/_build/html/* .
+        rm -rf docs batchflow
+        touch .nojekyll
+        git config user.email rhudor@gmail.com
+        git config user.name "Roman Kh"
+        git add -A .
+        git commit -am "Build docs"
+        git remote add gh_pages https://${{ secrets.GITHUB_PUSH }}@github.com/${{ github.repository }}
+        git push -f gh_pages gh-pages
+
+    - uses: actions/checkout@v2
+
     - name: Install dependencies
       run: python -m pip install --upgrade pip setuptools wheel twine
     - name: Build and publish
