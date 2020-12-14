@@ -1,15 +1,9 @@
 name: release
 
 on:
-
   release:
     types: [published]
 
-  push:
-
-    branches:
-
-      - github_actions
 
 jobs:
 
