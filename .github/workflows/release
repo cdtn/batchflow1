@@ -1,51 +1,22 @@
 name: release
 
 on:
-  push:
-    tags:
-      - v*
 
-jobs:
   release:
 
+  push:
+
+    branches:
+
+      - github_actions
+
+jobs:
+
+  codecov:
     runs-on: ubuntu-latest
 
     container:
       image: analysiscenter1/ds-py3:cpu
-
-    steps:
-    - uses: actions/checkout@v1
-
-    - name: Build docs
-      run: |
-        export LC_ALL="C"
-        pip3 install --upgrade sphinx sphinx-rtd-theme
-        git checkout --orphan gh-pages
-        rm -rf *
-        git fetch
-        git checkout origin/master -- batchflow docs
-        cd docs
-        make html
-
-    - name: Commit docs
-      run: |
-        mv docs/_build/html/* .
-        rm -rf docs batchflow
-        touch .nojekyll
-        git config user.email rhudor@gmail.com
-        git config user.name "Roman Kh"
-        git add -A .
-        git commit -am "Build docs"
-
-    - name: Push docs
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: gh-pages
-        force: True
-
-    - name: Clear docs
-      run: rm -rf *
 
     - uses: actions/checkout@v1
 
@@ -58,6 +29,15 @@ jobs:
       run: |
         pip3 install -U codecov
         codecov -t ${{ secrets.CODECOV_TOKEN }}
+
+
+  pypi:
+    needs: [doc, codecov]
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: analysiscenter1/ds-py3:cpu
 
     - uses: actions/checkout@v1
 
