@@ -12,7 +12,8 @@ jobs:
 
     container:
       image: analysiscenter1/ds-py3:cpu
-
+    
+    steps:
     - uses: actions/checkout@v1
 
     - name: Generate coverage report
@@ -27,13 +28,14 @@ jobs:
 
 
   pypi:
-    needs: [doc, codecov]
+    needs: codecov
 
     runs-on: ubuntu-latest
 
     container:
       image: analysiscenter1/ds-py3:cpu
 
+    steps:
     - uses: actions/checkout@v1
 
     - name: Install dependencies
