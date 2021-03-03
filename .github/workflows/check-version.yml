@@ -2,7 +2,7 @@ name: check-version
 
 on:
   release:
-    types: [drafted]
+    types: [created]
 
 
 jobs:
