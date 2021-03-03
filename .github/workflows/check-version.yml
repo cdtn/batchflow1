@@ -1,0 +1,21 @@
+name: check-version
+
+on:
+  release:
+    types: [drafted]
+
+
+jobs:
+
+  check-version:
+    runs-on: ubuntu-latest
+
+    container:
+      image: analysiscenter1/ds-py3:cpu
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Create and run script
+      run: |
+        echo ${GITHUB_REF##*/}
