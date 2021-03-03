@@ -18,4 +18,8 @@ jobs:
 
     - name: Create and run script
       run: |
-        echo ${GITHUB_REF##*/}
+        if python3 check_release_version.py ${GITHUB_REF##*/}; then
+          echo "ok"
+        else
+          echo "not ok"
+        fi
