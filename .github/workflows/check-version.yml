@@ -20,5 +20,5 @@ jobs:
       run: python3 check_release_version.py ${GITHUB_REF##*/} >> $RELEASE_VERSION_MISMATCH
 
     - name: Conditionally cancel job
-      if: $RELEASE_VERSION_MISMATCH
+      if: ${{RELEASE_VERSION_MISMATCH}}
       uses: andymckay/cancel-action@0.2
