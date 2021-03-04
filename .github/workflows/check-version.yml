@@ -10,11 +10,8 @@ jobs:
   check-version:
     runs-on: ubuntu-latest
 
-    container:
-      image: analysiscenter1/ds-py3:cpu
-
     steps:
     - uses: actions/checkout@v1
 
     - name: Run check script
-      run: if python3 release_version_mismatch.py ${GITHUB_REF##*/})"; then echo "::error::RELEASE VERSION MISMATCH" fi
+      run: if python3 release_version_mismatch.py ${GITHUB_REF##*/}; then echo "::error::RELEASE VERSION MISMATCH" fi
