@@ -21,5 +21,5 @@ jobs:
       run: echo "RELEASE_VERSION_MISMATCH=$(python3 release_version_mismatch.py ${GITHUB_REF##*/})" >> $GITHUB_ENV
 
     - name: Conditionally cancel job
-      if: env.RELEASE_VERSION_MISMATCH
+      if: env.RELEASE_VERSION_MISMATCH == 1
       run: echo "::error::RELEASE VERSION MISMATCH"
