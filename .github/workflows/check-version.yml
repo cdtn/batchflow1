@@ -22,4 +22,4 @@ jobs:
 
     - name: Conditionally cancel job
       if: env.RELEASE_VERSION_MISMATCH
-      uses: andymckay/cancel-action@0.2
+      run: echo "::error::RELEASE VERSION MISMATCH"
